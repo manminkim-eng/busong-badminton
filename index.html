@@ -323,7 +323,8 @@ const DEFAULT_MEMBERS = [
   {id:35,name:"구현우",phone:"01096485840"},{id:36,name:"최정순",phone:"01050052814"},
   {id:37,name:"김만민",phone:"01082871231"},{id:38,name:"문영석",phone:"01036813108"},
   {id:39,name:"진건호",phone:"01092154332"},{id:40,name:"조귀제",phone:"01062702518"},
-  {id:41,name:"진하연",phone:"01063250202"},{id:42,name:"김희선",phone:"01039252309"},
+  {id:41,name:"진하연",phone:"01063250202"},
+  /* id:42 김희선 탈퇴 (2026 하반기) */
   {id:43,name:"김재현",phone:"01036811991"},{id:44,name:"강석호",phone:"01039115826"},
   {id:45,name:"김대일",phone:"01099841021"},{id:46,name:"정도현",phone:"01086687236"},
   /* id:47 이미화 탈퇴 */
@@ -332,37 +333,38 @@ const DEFAULT_MEMBERS = [
   {id:51,name:"김윤성",phone:"01030998323"},
   /* id:52 한승환 탈퇴 */
   {id:53,name:"최정윤",phone:"01094865929"}, /* 신규 추가 */
-  {id:54,name:"서은혜",phone:"01036751830"}, /* 신규 추가 */
-  {id:55,name:"최은아",phone:"01036751830"}  /* 신규 추가 (이미화 대체) */
+  {id:54,name:"서은혜",phone:"01044951654"}, /* 신규 추가 */
+  {id:55,name:"최은아",phone:"01036751830"}, /* 신규 추가 (이미화 대체) */
+  {id:56,name:"윤희석",phone:"01040305325"}   /* 신규 추가 (2026 하반기) */
 ];
 
 const DEFAULT_SCHEDULES = [
-  {id:1, startDate:"2026-04-16",endDate:"2026-04-17",memberIds:[1,2],  note:""},
-  {id:2, startDate:"2026-04-20",endDate:"2026-04-21",memberIds:[3,4],  note:""},
-  {id:3, startDate:"2026-04-22",endDate:"2026-04-23",memberIds:[5,6],  note:""},
-  {id:4, startDate:"2026-04-24",endDate:"2026-04-27",memberIds:[7,46], note:""},  /* 장원택→정도현 */
-  {id:5, startDate:"2026-04-28",endDate:"2026-04-29",memberIds:[9,10], note:""},
-  {id:6, startDate:"2026-04-30",endDate:"2026-05-01",memberIds:[11,51],note:""},           /* 한상일→김윤성 */
-  {id:7, startDate:"2026-05-04",endDate:"2026-05-06",memberIds:[13,14],note:"5/5 어린이날 제외"},
-  {id:8, startDate:"2026-05-07",endDate:"2026-05-08",memberIds:[15,16],note:""},
-  {id:9, startDate:"2026-05-11",endDate:"2026-05-12",memberIds:[17,18],note:""},
-  {id:10,startDate:"2026-05-13",endDate:"2026-05-14",memberIds:[19,20],note:""},
-  {id:11,startDate:"2026-05-15",endDate:"2026-05-18",memberIds:[21,22],note:""},
-  {id:12,startDate:"2026-05-19",endDate:"2026-05-20",memberIds:[23,24],note:""},
-  {id:13,startDate:"2026-05-21",endDate:"2026-05-22",memberIds:[25,26],note:""},
-  {id:14,startDate:"2026-05-26",endDate:"2026-05-27",memberIds:[27,28],note:"5/25 부처님오신날 대체공휴일 제외"},
-  {id:15,startDate:"2026-05-28",endDate:"2026-05-29",memberIds:[29,30],note:""},
-  {id:16,startDate:"2026-06-01",endDate:"2026-06-02",memberIds:[31,32],note:""},
-  {id:17,startDate:"2026-06-04",endDate:"2026-06-05",memberIds:[33,34],note:"6/3 전국동시지방선거 제외"},
-  {id:18,startDate:"2026-06-08",endDate:"2026-06-09",memberIds:[35,36],note:""},
-  {id:19,startDate:"2026-06-10",endDate:"2026-06-11",memberIds:[37,38],note:""},
-  {id:20,startDate:"2026-06-12",endDate:"2026-06-15",memberIds:[39,40],note:""},
-  {id:21,startDate:"2026-06-16",endDate:"2026-06-17",memberIds:[41,42],note:""},
-  {id:22,startDate:"2026-06-18",endDate:"2026-06-19",memberIds:[43,44],note:""},
-  {id:23,startDate:"2026-06-22",endDate:"2026-06-23",memberIds:[45,8], note:""},  /* 정도현→장원택 */
-  {id:24,startDate:"2026-06-24",endDate:"2026-06-25",memberIds:[55,48],note:""},           /* 이미화→최은아 */
-  {id:25,startDate:"2026-06-26",endDate:"2026-06-29",memberIds:[49,50],note:""},
-  {id:26,startDate:"2026-06-30",endDate:"2026-07-01",memberIds:[53,54],note:""}            /* 김윤성·한승환→최정윤·서은혜 */
+  {id:1, startDate:"2026-07-02",endDate:"2026-07-03",memberIds:[1,2],  note:""},
+  {id:2, startDate:"2026-07-06",endDate:"2026-07-07",memberIds:[3,4],  note:""},
+  {id:3, startDate:"2026-07-08",endDate:"2026-07-09",memberIds:[5,6],  note:""},
+  {id:4, startDate:"2026-07-10",endDate:"2026-07-13",memberIds:[7,46], note:""},
+  {id:5, startDate:"2026-07-14",endDate:"2026-07-15",memberIds:[9,10], note:""},
+  {id:6, startDate:"2026-07-16",endDate:"2026-07-17",memberIds:[11,51],note:""},
+  {id:7, startDate:"2026-07-20",endDate:"2026-07-21",memberIds:[13,14],note:""},
+  {id:8, startDate:"2026-07-22",endDate:"2026-07-23",memberIds:[15,16],note:""},
+  {id:9, startDate:"2026-07-24",endDate:"2026-07-27",memberIds:[17,18],note:""},
+  {id:10,startDate:"2026-07-28",endDate:"2026-07-29",memberIds:[19,20],note:""},
+  {id:11,startDate:"2026-07-30",endDate:"2026-07-31",memberIds:[21,22],note:""},
+  {id:12,startDate:"2026-08-03",endDate:"2026-08-04",memberIds:[23,24],note:""},
+  {id:13,startDate:"2026-08-05",endDate:"2026-08-06",memberIds:[25,26],note:""},
+  {id:14,startDate:"2026-08-07",endDate:"2026-08-10",memberIds:[27,28],note:""},
+  {id:15,startDate:"2026-08-11",endDate:"2026-08-12",memberIds:[29,30],note:""},
+  {id:16,startDate:"2026-08-13",endDate:"2026-08-14",memberIds:[31,32],note:""},
+  {id:17,startDate:"2026-08-17",endDate:"2026-08-18",memberIds:[33,34],note:""},
+  {id:18,startDate:"2026-08-19",endDate:"2026-08-20",memberIds:[35,36],note:""},
+  {id:19,startDate:"2026-08-21",endDate:"2026-08-24",memberIds:[37,38],note:""},
+  {id:20,startDate:"2026-08-25",endDate:"2026-08-26",memberIds:[39,40],note:""},
+  {id:21,startDate:"2026-08-27",endDate:"2026-08-28",memberIds:[41,50],note:""},           /* 김희선 탈퇴→이연숙 이동 */
+  {id:22,startDate:"2026-08-31",endDate:"2026-09-01",memberIds:[43,44],note:""},
+  {id:23,startDate:"2026-09-02",endDate:"2026-09-03",memberIds:[45,8], note:""},
+  {id:24,startDate:"2026-09-04",endDate:"2026-09-07",memberIds:[55,48],note:""},
+  {id:25,startDate:"2026-09-08",endDate:"2026-09-09",memberIds:[49,56],note:""},           /* 최도군·신입 윤희석 */
+  {id:26,startDate:"2026-09-10",endDate:"2026-09-11",memberIds:[53,54],note:""}
 ];
 
 // Load from localStorage
@@ -798,9 +800,9 @@ function generateCert(){
   // ━━━━━━━━━━━━━━━━━━━━━━
   card(PAD,cy,W-PAD*2,footH,14,C.n3,C.bdA,1);
   ctx.fillStyle=C.t3; ctx.textAlign='left'; ctx.font=F(400,20);
-  ctx.fillText('2026.04.16 ~ 2026.07.01',PAD+28,cy+footH-18);
+  ctx.fillText('2026.07.02 ~ 2026.09.11',PAD+28,cy+footH-18);
   ctx.fillStyle=C.t3; ctx.textAlign='right'; ctx.font=F(400,20);
-  ctx.fillText('MANMIN-Ver1.0',W-PAD-28,cy+footH-18);
+  ctx.fillText('MANMIN-Ver2.0',W-PAD-28,cy+footH-18);
 
   certDataUrl=canvas.toDataURL('image/jpeg',0.93);
 
@@ -893,6 +895,25 @@ function renderSms(){
   renderSmsPreview();
 }
 
+// ── 봉사 글귀 / 짧은 시 (회차별 자동 순환) ──
+const SERVICE_QUOTES=[
+  "보이지 않는 손길이 모두의 내일을 빛냅니다.",
+  "당신의 작은 수고가 우리 모두의 큰 즐거움이 됩니다.",
+  "깨끗한 코트 위에 당신의 정성이 오래 머뭅니다.",
+  "함께 쓸고 닦는 마음 — 그것이 부송의 진짜 힘입니다.",
+  "오늘의 봉사가 내일의 부송을 키웁니다.",
+  "묵묵한 손길 하나가 모두의 하루를 바꿉니다.",
+  "봉사는 받은 것을 돌려주는 가장 아름다운 운동입니다.",
+  "당신이 있어 부송의 코트는 늘 새 아침입니다."
+];
+const SERVICE_POEMS=[
+  "셔틀콕이 오가는 자리마다\n누군가의 손길이 머물러 있습니다.\n오늘 그 손길의 주인은 당신,\n고맙습니다 — 부송의 빛이 되어주어서.",
+  "빗자루가 지나간 자리엔\n먼지가 아니라 마음이 닦입니다.\n당신의 두 손이 만든 깨끗함 위에서\n우리는 또 하나가 됩니다.",
+  "누군가는 치고\n누군가는 닦습니다.\n그 둘이 하나 될 때\n부송은 비로소 완성됩니다."
+];
+function pickQuote(seed){const n=SERVICE_QUOTES.length;return SERVICE_QUOTES[(((seed||0)%n)+n)%n];}
+function pickPoem(seed){const n=SERVICE_POEMS.length;return SERVICE_POEMS[(((seed||0)%n)+n)%n];}
+
 function getSmsText(sched,member,tpl,customText){
   const ms=getSchedMembers(sched);
   const period=`${fmtDate(sched.startDate)} ~ ${fmtDate(sched.endDate)}`;
@@ -919,6 +940,9 @@ ${sched.note?`⚠️ ${sched.note}`:''}
 
 변경 시 임원진에 사전 연락 필수
 
+🌿 오늘의 봉사 한마디
+「${pickQuote(sched.id)}」
+
 감사합니다 🙏
 -부송 배드민턴클럽 남부회장-`;
   }
@@ -932,6 +956,9 @@ ${member.name} 회원님, 내일 청소당번입니다!
 ${others?`📞 동료: ${others}`:''}
 
 만물쇼핑에서 열쇠를 꼭 수령해 주세요 🔑
+
+🌿 오늘의 봉사 한마디
+「${pickQuote(sched.id)}」
 
 -부송 배드민턴클럽 남부회장-`;
   }
@@ -947,6 +974,9 @@ ${member.name} 회원님께 📜
 
 임명장 이미지를 함께 발송드립니다.
 소중한 봉사 감사드립니다 🏆
+
+🌿 부송의 마음
+${pickPoem(sched.id)}
 
 -부송 배드민턴클럽 남부회장-`;
   }
@@ -1315,7 +1345,19 @@ document.addEventListener('click',e=>{
 // PWA SERVICE WORKER
 // ══════════════════════════════════════════
 if('serviceWorker' in navigator){
-  navigator.serviceWorker.register('sw.js').catch(()=>{});
+  // 새 서비스워커가 제어권을 잡으면(=새 버전 배포) 자동으로 한 번만 새로고침
+  // 단, 최초 설치(기존 제어자 없음) 때는 새로고침하지 않음
+  let swReloaded=false;
+  const hadController=!!navigator.serviceWorker.controller;
+  navigator.serviceWorker.addEventListener('controllerchange',()=>{
+    if(swReloaded||!hadController)return;
+    swReloaded=true;
+    location.reload();
+  });
+  navigator.serviceWorker.register('sw.js').then(reg=>{
+    // 탭이 떠 있는 동안 주기적으로 업데이트 확인 (1시간마다)
+    setInterval(()=>reg.update().catch(()=>{}),60*60*1000);
+  }).catch(()=>{});
 }
 
 // ══════════════════════════════════════════

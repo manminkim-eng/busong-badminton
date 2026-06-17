@@ -4,8 +4,12 @@
    전략: Cache-First (로컬 자산) + Network-First (외부 CDN)
    ═══════════════════════════════════════════════════════════════ */
 
-const CACHE_NAME   = 'busong-duty-v1.0';
-const CDN_CACHE    = 'busong-duty-cdn-v1.0';
+/* 배포할 때마다 숫자만 올리면(예: v1 → v2) 구버전 캐시가 자동 폐기됩니다.
+   단, index.html 은 아래 FETCH 라우팅에서 Network-First 로 처리하므로
+   온라인 상태라면 버전을 올리지 않아도 항상 최신 코드를 받습니다.        */
+const SW_VERSION   = 'v3';
+const CACHE_NAME   = `busong-duty-${SW_VERSION}`;
+const CDN_CACHE    = `busong-duty-cdn-${SW_VERSION}`;
 const OFFLINE_PAGE = './index.html';
 
 /* ── 앱 셸: 설치 즉시 프리캐시 ─────────────────────────────── */
@@ -71,11 +75,33 @@ self.addEventListener('fetch', (event) => {
   if (!request.url.startsWith('http')) return;
 
   const url = new URL(request.url);
+
+  // 앱 셸(HTML) — Network-First: 온라인이면 항상 최신 코드, 오프라인이면 캐시
+  const isAppShell = request.mode === 'navigate'
+    || url.pathname.endsWith('/')
+    || url.pathname.endsWith('/index.html');
+  if (isAppShell) { event.respondWith(networkFirstHTML(request)); return; }
+
   const isCDN = CDN_ORIGINS.some(
     (o) => url.origin === new URL(o).origin || request.url.startsWith(o)
   );
   event.respondWith(isCDN ? networkFirstCDN(request) : cacheFirstLocal(request));
 });
+
+/* HTML 전용 Network-First — 항상 네트워크 먼저, 실패 시 캐시 폴백 */
+async function networkFirstHTML(request) {
+  try {
+    const res = await fetch(request, { cache: 'no-store' });
+    if (res && res.status === 200)
+      (await caches.open(CACHE_NAME)).put(OFFLINE_PAGE, res.clone());
+    return res;
+  } catch (_) {
+    return (await caches.match(OFFLINE_PAGE))
+      || (await caches.match(request))
+      || new Response('오프라인 상태입니다. 앱을 먼저 온라인에서 한 번 열어주세요.',
+        { status: 503, headers: { 'Content-Type': 'text/plain; charset=utf-8' } });
+  }
+}
 
 async function cacheFirstLocal(request) {
   const cached = await caches.match(request);
