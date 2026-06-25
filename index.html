@@ -367,6 +367,21 @@ const DEFAULT_SCHEDULES = [
   {id:26,startDate:"2026-09-10",endDate:"2026-09-11",memberIds:[53,54],note:""}
 ];
 
+// ── DATA_VERSION 가드 ─────────────────────────
+// 기본 회원/일정(DEFAULT_*)을 수정할 때마다 아래 값만 올리면,
+// 사용자 기기에 캐시된 옛 localStorage 데이터를 자동 폐기하고
+// 최신 기본표로 갱신합니다. (예: 최도군·윤희석 짝 갱신)
+const DATA_VERSION = '2026-09-08';   // ← 기본표 변경 시 이 값을 올리세요
+
+(function migrateData(){
+  const stored = localStorage.getItem('busong_data_version');
+  if(stored !== DATA_VERSION){
+    localStorage.removeItem('busong_members');
+    localStorage.removeItem('busong_schedules');
+    localStorage.setItem('busong_data_version', DATA_VERSION);
+  }
+})();
+
 // Load from localStorage
 let members = JSON.parse(localStorage.getItem('busong_members') || 'null') || DEFAULT_MEMBERS;
 let schedules = JSON.parse(localStorage.getItem('busong_schedules') || 'null') || DEFAULT_SCHEDULES;
