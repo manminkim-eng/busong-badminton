@@ -1,20 +1,21 @@
-/* ═══════════════════════════════════════════════════════════════
+/* ===============================================================
    부송클럽 청소당번 관리 — Service Worker
    Busong Badminton Club Duty Roster Manager
    전략: Cache-First (로컬 자산) + Network-First (외부 CDN)
-   ═══════════════════════════════════════════════════════════════ */
+   =============================================================== */
 
-/* 배포할 때마다 숫자만 올리면(예: v1 → v2) 구버전 캐시가 자동 폐기됩니다.
-   단, index.html 은 아래 FETCH 라우팅에서 Network-First 로 처리하므로
+/* 배포할 때마다 숫자만 올리면(예: v1 -> v2) 구버전 캐시가 자동 폐기됩니다.
+   단, HTML 문서는 아래 FETCH 라우팅에서 Network-First 로 처리하므로
    온라인 상태라면 버전을 올리지 않아도 항상 최신 코드를 받습니다.        */
-const SW_VERSION   = 'v3';
+const SW_VERSION   = 'v4';
 const CACHE_NAME   = `busong-duty-${SW_VERSION}`;
 const CDN_CACHE    = `busong-duty-cdn-${SW_VERSION}`;
 const OFFLINE_PAGE = './index.html';
 
-/* ── 앱 셸: 설치 즉시 프리캐시 ─────────────────────────────── */
+/* ── 앱 셸: 설치 즉시 프리캐시 ────────────────────── */
 const APP_SHELL = [
   './index.html',
+  './appointment-1c.html',
   './manifest.json',
   './icons/icon-72.png',
   './icons/icon-96.png',
@@ -30,7 +31,7 @@ const APP_SHELL = [
   './icons/favicon.ico',
 ];
 
-/* ── CDN 오리진 (Network-First) ─────────────────────────────── */
+/* ── CDN 오리진 (Network-First) ───────────────────── */
 const CDN_ORIGINS = [
   'https://fonts.googleapis.com',
   'https://fonts.gstatic.com',
@@ -39,9 +40,9 @@ const CDN_ORIGINS = [
   'https://unpkg.com',
 ];
 
-/* ══════════════════════════════════════════════════════════════
+/* ==============================================================
    INSTALL — 앱 셸 프리캐시
-   ══════════════════════════════════════════════════════════════ */
+   ============================================================== */
 self.addEventListener('install', (event) => {
   console.log('[SW] Install — 프리캐시 시작');
   event.waitUntil(
@@ -52,9 +53,9 @@ self.addEventListener('install', (event) => {
   );
 });
 
-/* ══════════════════════════════════════════════════════════════
+/* ==============================================================
    ACTIVATE — 구버전 캐시 삭제
-   ══════════════════════════════════════════════════════════════ */
+   ============================================================== */
 self.addEventListener('activate', (event) => {
   event.waitUntil(
     caches.keys()
@@ -66,9 +67,9 @@ self.addEventListener('activate', (event) => {
   );
 });
 
-/* ══════════════════════════════════════════════════════════════
+/* ==============================================================
    FETCH — 요청 라우팅
-   ══════════════════════════════════════════════════════════════ */
+   ============================================================== */
 self.addEventListener('fetch', (event) => {
   const { request } = event;
   if (request.method !== 'GET') return;
@@ -76,11 +77,15 @@ self.addEventListener('fetch', (event) => {
 
   const url = new URL(request.url);
 
-  // 앱 셸(HTML) — Network-First: 온라인이면 항상 최신 코드, 오프라인이면 캐시
-  const isAppShell = request.mode === 'navigate'
-    || url.pathname.endsWith('/')
-    || url.pathname.endsWith('/index.html');
-  if (isAppShell) { event.respondWith(networkFirstHTML(request)); return; }
+  // HTML 문서 — Network-First: 온라인이면 항상 최신, 오프라인이면 캐시
+  const isHTML = request.mode === 'navigate' || url.pathname.endsWith('.html') || url.pathname.endsWith('/');
+  if (isHTML) {
+    // 메인 앱(루트 / index.html)만 OFFLINE_PAGE 키로 보관.
+    // 임명장 등 보조 HTML은 자기 경로 키로만 캐시해서 앱셸을 오염시키지 않음.
+    const isMainApp = url.pathname.endsWith('/') || url.pathname.endsWith('/index.html');
+    event.respondWith(networkFirstHTML(request, isMainApp));
+    return;
+  }
 
   const isCDN = CDN_ORIGINS.some(
     (o) => url.origin === new URL(o).origin || request.url.startsWith(o)
@@ -89,15 +94,18 @@ self.addEventListener('fetch', (event) => {
 });
 
 /* HTML 전용 Network-First — 항상 네트워크 먼저, 실패 시 캐시 폴백 */
-async function networkFirstHTML(request) {
+async function networkFirstHTML(request, isMainApp) {
   try {
     const res = await fetch(request, { cache: 'no-store' });
-    if (res && res.status === 200)
-      (await caches.open(CACHE_NAME)).put(OFFLINE_PAGE, res.clone());
+    if (res && res.status === 200) {
+      const cache = await caches.open(CACHE_NAME);
+      cache.put(request, res.clone());
+      if (isMainApp) cache.put(OFFLINE_PAGE, res.clone());
+    }
     return res;
   } catch (_) {
-    return (await caches.match(OFFLINE_PAGE))
-      || (await caches.match(request))
+    return (await caches.match(request))
+      || (await caches.match(OFFLINE_PAGE))
       || new Response('오프라인 상태입니다. 앱을 먼저 온라인에서 한 번 열어주세요.',
         { status: 503, headers: { 'Content-Type': 'text/plain; charset=utf-8' } });
   }
@@ -131,9 +139,9 @@ async function networkFirstCDN(request) {
   }
 }
 
-/* ══════════════════════════════════════════════════════════════
+/* ==============================================================
    MESSAGE — SKIP_WAITING
-   ══════════════════════════════════════════════════════════════ */
+   ============================================================== */
 self.addEventListener('message', (event) => {
   if (event.data?.type === 'SKIP_WAITING' || event.data?.action === 'SKIP_WAITING')
     self.skipWaiting();
@@ -141,9 +149,9 @@ self.addEventListener('message', (event) => {
     caches.keys().then((keys) => Promise.all(keys.map((k) => caches.delete(k))));
 });
 
-/* ══════════════════════════════════════════════════════════════
+/* ==============================================================
    PUSH — 알림 (당번 알림 등 확장용)
-   ══════════════════════════════════════════════════════════════ */
+   ============================================================== */
 self.addEventListener('push', (event) => {
   const data = event.data?.json() ?? { title: '부송클럽 당번 알림', body: '오늘의 청소 당번을 확인하세요!' };
   event.waitUntil(
