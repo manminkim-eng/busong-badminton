@@ -397,7 +397,7 @@ function roundOf(sched){
 // 기본 회원/일정(DEFAULT_*)을 수정할 때마다 아래 값만 올리면,
 // 사용자 기기에 캐시된 옛 localStorage 데이터를 자동 폐기하고
 // 최신 기본표로 갱신합니다. (예: 최도군·윤희석 짝 갱신)
-const DATA_VERSION = '2026-09-14d';   // ← 기본표 변경 시 이 값을 올리세요
+const DATA_VERSION = '2026-09-14e';   // ← 기본표 변경 시 이 값을 올리세요
 
 (function migrateData(){
   const stored = localStorage.getItem('busong_data_version');
@@ -704,6 +704,16 @@ function generateCert(){
   ctx.strokeStyle='rgba(255,209,58,0.08)'; ctx.lineWidth=88;
   ctx.beginPath(); ctx.arc(200,200,236,0,Math.PI*2); ctx.stroke();
   ctx.restore();
+
+  // 배경 엠블럼 워터마크 (1c 디자인 — 대형·저투명)
+  // 원본 대조 실측값: 중심(540,1140) · 지름 1280 · alpha 0.085
+  if(window._emblemImg){
+    ctx.save();
+    ctx.globalAlpha=0.085;
+    const WM=1280;
+    ctx.drawImage(window._emblemImg, W/2-WM/2, 1140-WM/2, WM, WM);
+    ctx.restore();
+  }
 
   // 금색 파선 띠 (1c: top196 h8, 34/44 반복 → ×2: y392 h16, 68/88)
   ctx.fillStyle=C.gold;
