@@ -312,7 +312,8 @@ const DEFAULT_MEMBERS = [
   {id:13,name:"김기창",phone:"01034404867"},{id:14,name:"가이",  phone:"01032079969"},
   {id:15,name:"장대건",phone:"01099097797"},{id:16,name:"양석준",phone:"01091745178"},
   {id:17,name:"박관용",phone:"01064768079"},{id:18,name:"심상미",phone:"01064788079"},
-  {id:19,name:"김보권",phone:"01086111445"},{id:20,name:"박호민",phone:"01094323468"},
+  {id:19,name:"김보권",phone:"01086111445"},
+  /* id:20 박호민 탈퇴 (2026 하반기 2회차) */
   {id:21,name:"김종갑",phone:"01066520936"},{id:22,name:"최진규",phone:"01030820085"},
   {id:23,name:"최영준",phone:"01066022048"},{id:24,name:"김종현",phone:"01020654997"},
   {id:25,name:"임채웅",phone:"01085895417"},{id:26,name:"정해영",phone:"01065685417"},
@@ -334,44 +335,54 @@ const DEFAULT_MEMBERS = [
   /* id:52 한승환 탈퇴 */
   {id:53,name:"최정윤",phone:"01094865929"}, /* 신규 추가 */
   {id:54,name:"서은혜",phone:"01044951654"}, /* 신규 추가 */
-  {id:55,name:"최은아",phone:"01036751830"}, /* 신규 추가 (이미화 대체) */
-  {id:56,name:"윤희석",phone:"01040305325"}   /* 신규 추가 (2026 하반기) */
+  /* id:55 최은아 탈퇴 (2026 하반기 2회차) */
+  {id:56,name:"윤희석",phone:"01040305325"},
+  {id:57,name:"오정현",phone:"01062509692"}, /* 신규 추가 (박호민 대체) */
+  {id:58,name:"안성호",phone:"01094534042"}   /* 신규 추가 (최은아 대체) */
 ];
 
 const DEFAULT_SCHEDULES = [
-  {id:1, startDate:"2026-07-02",endDate:"2026-07-03",memberIds:[1,2],  note:""},
-  {id:2, startDate:"2026-07-06",endDate:"2026-07-07",memberIds:[3,4],  note:""},
-  {id:3, startDate:"2026-07-08",endDate:"2026-07-09",memberIds:[5,6],  note:""},
-  {id:4, startDate:"2026-07-10",endDate:"2026-07-13",memberIds:[7,46], note:""},
-  {id:5, startDate:"2026-07-14",endDate:"2026-07-15",memberIds:[9,10], note:""},
-  {id:6, startDate:"2026-07-16",endDate:"2026-07-17",memberIds:[11,51],note:""},
-  {id:7, startDate:"2026-07-20",endDate:"2026-07-21",memberIds:[13,14],note:""},
-  {id:8, startDate:"2026-07-22",endDate:"2026-07-23",memberIds:[15,16],note:""},
-  {id:9, startDate:"2026-07-24",endDate:"2026-07-27",memberIds:[17,18],note:""},
-  {id:10,startDate:"2026-07-28",endDate:"2026-07-29",memberIds:[19,20],note:""},
-  {id:11,startDate:"2026-07-30",endDate:"2026-07-31",memberIds:[21,22],note:""},
-  {id:12,startDate:"2026-08-03",endDate:"2026-08-04",memberIds:[23,24],note:""},
-  {id:13,startDate:"2026-08-05",endDate:"2026-08-06",memberIds:[25,26],note:""},
-  {id:14,startDate:"2026-08-07",endDate:"2026-08-10",memberIds:[27,28],note:""},
-  {id:15,startDate:"2026-08-11",endDate:"2026-08-12",memberIds:[29,30],note:""},
-  {id:16,startDate:"2026-08-13",endDate:"2026-08-14",memberIds:[31,32],note:""},
-  {id:17,startDate:"2026-08-17",endDate:"2026-08-18",memberIds:[33,34],note:""},
-  {id:18,startDate:"2026-08-19",endDate:"2026-08-20",memberIds:[35,36],note:""},
-  {id:19,startDate:"2026-08-21",endDate:"2026-08-24",memberIds:[37,38],note:""},
-  {id:20,startDate:"2026-08-25",endDate:"2026-08-26",memberIds:[39,40],note:""},
-  {id:21,startDate:"2026-08-27",endDate:"2026-08-28",memberIds:[41,50],note:""},           /* 김희선 탈퇴→이연숙 이동 */
-  {id:22,startDate:"2026-08-31",endDate:"2026-09-01",memberIds:[43,44],note:""},
-  {id:23,startDate:"2026-09-02",endDate:"2026-09-03",memberIds:[45,8], note:""},
-  {id:24,startDate:"2026-09-04",endDate:"2026-09-07",memberIds:[55,48],note:""},
-  {id:25,startDate:"2026-09-08",endDate:"2026-09-09",memberIds:[49,56],note:""},           /* 최도군·신입 윤희석 */
-  {id:26,startDate:"2026-09-10",endDate:"2026-09-11",memberIds:[53,54],note:""}
+  /* ── 1회차 잔여분 (7/2~9/11 중 미시행분) ── */
+  {id:1, startDate:"2026-08-27",endDate:"2026-08-28",memberIds:[41,50],note:""},
+  {id:2, startDate:"2026-08-31",endDate:"2026-09-01",memberIds:[43,44],note:""},
+  {id:3, startDate:"2026-09-02",endDate:"2026-09-03",memberIds:[45,8] ,note:""},
+  {id:4, startDate:"2026-09-04",endDate:"2026-09-07",memberIds:[58,48],note:""},           /* 최은아 탈퇴→안성호 대체 */
+  {id:5, startDate:"2026-09-08",endDate:"2026-09-09",memberIds:[49,56],note:""},
+  {id:6, startDate:"2026-09-10",endDate:"2026-09-11",memberIds:[53,54],note:""},
+  /* ── 이하 2026 하반기 2회차 (9/14~11/24) ── */
+  {id:7, startDate:"2026-09-14",endDate:"2026-09-15",memberIds:[1,2]  ,note:""},
+  {id:8, startDate:"2026-09-16",endDate:"2026-09-17",memberIds:[3,4]  ,note:""},
+  {id:9, startDate:"2026-09-18",endDate:"2026-09-21",memberIds:[5,6]  ,note:""},
+  {id:10,startDate:"2026-09-22",endDate:"2026-09-23",memberIds:[7,46] ,note:""},
+  {id:11,startDate:"2026-09-24",endDate:"2026-09-25",memberIds:[9,10] ,note:""},
+  {id:12,startDate:"2026-09-28",endDate:"2026-09-29",memberIds:[11,51],note:""},
+  {id:13,startDate:"2026-09-30",endDate:"2026-10-01",memberIds:[13,14],note:""},
+  {id:14,startDate:"2026-10-02",endDate:"2026-10-05",memberIds:[15,16],note:""},
+  {id:15,startDate:"2026-10-06",endDate:"2026-10-07",memberIds:[17,18],note:""},
+  {id:16,startDate:"2026-10-08",endDate:"2026-10-09",memberIds:[19,57],note:""},           /* 박호민 탈퇴→오정현 대체 */
+  {id:17,startDate:"2026-10-12",endDate:"2026-10-13",memberIds:[21,22],note:""},
+  {id:18,startDate:"2026-10-14",endDate:"2026-10-15",memberIds:[23,24],note:""},
+  {id:19,startDate:"2026-10-16",endDate:"2026-10-19",memberIds:[25,26],note:""},
+  {id:20,startDate:"2026-10-20",endDate:"2026-10-21",memberIds:[27,28],note:""},
+  {id:21,startDate:"2026-10-22",endDate:"2026-10-23",memberIds:[29,30],note:""},
+  {id:22,startDate:"2026-10-26",endDate:"2026-10-27",memberIds:[31,32],note:""},
+  {id:23,startDate:"2026-10-28",endDate:"2026-10-29",memberIds:[33,34],note:""},
+  {id:24,startDate:"2026-10-30",endDate:"2026-11-02",memberIds:[35,36],note:""},
+  {id:25,startDate:"2026-11-03",endDate:"2026-11-04",memberIds:[37,38],note:""},
+  {id:26,startDate:"2026-11-05",endDate:"2026-11-06",memberIds:[39,40],note:""},
+  {id:27,startDate:"2026-11-09",endDate:"2026-11-10",memberIds:[41,50],note:""},
+  {id:28,startDate:"2026-11-11",endDate:"2026-11-12",memberIds:[43,44],note:""},
+  {id:29,startDate:"2026-11-13",endDate:"2026-11-16",memberIds:[45,8] ,note:""},
+  {id:30,startDate:"2026-11-17",endDate:"2026-11-18",memberIds:[58,48],note:""},           /* 최은아 탈퇴→안성호 대체 */
+  {id:31,startDate:"2026-11-19",endDate:"2026-11-20",memberIds:[49,56],note:""},
+  {id:32,startDate:"2026-11-23",endDate:"2026-11-24",memberIds:[53,54],note:""}
 ];
 
 // ── DATA_VERSION 가드 ─────────────────────────
 // 기본 회원/일정(DEFAULT_*)을 수정할 때마다 아래 값만 올리면,
 // 사용자 기기에 캐시된 옛 localStorage 데이터를 자동 폐기하고
 // 최신 기본표로 갱신합니다. (예: 최도군·윤희석 짝 갱신)
-const DATA_VERSION = '2026-09-08';   // ← 기본표 변경 시 이 값을 올리세요
+const DATA_VERSION = '2026-09-14';   // ← 기본표 변경 시 이 값을 올리세요
 
 (function migrateData(){
   const stored = localStorage.getItem('busong_data_version');
