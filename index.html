@@ -397,7 +397,7 @@ function roundOf(sched){
 // 기본 회원/일정(DEFAULT_*)을 수정할 때마다 아래 값만 올리면,
 // 사용자 기기에 캐시된 옛 localStorage 데이터를 자동 폐기하고
 // 최신 기본표로 갱신합니다. (예: 최도군·윤희석 짝 갱신)
-const DATA_VERSION = '2026-09-14c';   // ← 기본표 변경 시 이 값을 올리세요
+const DATA_VERSION = '2026-09-14d';   // ← 기본표 변경 시 이 값을 올리세요
 
 (function migrateData(){
   const stored = localStorage.getItem('busong_data_version');
@@ -864,7 +864,9 @@ function generateCert(){
 
   // 슬로건 밴드
   ctx.fillStyle=C.green; rr(PAD,cy,CW,SLOG_H,16); ctx.fill();
-  ctx.fillStyle=C.greenTx; ctx.font=F(900,30); ctx.textAlign='center';
+  // textAlign은 반드시 'left' — lsText()가 글자를 한 자씩 그리므로 'center'이면
+  // 폭이 좁은 문자(쉼표 등)만 절반 폭 기준으로 밀려 자간이 어긋난다.
+  ctx.fillStyle=C.greenTx; ctx.font=F(900,30); ctx.textAlign='left';
   const slogan='하나되는 우리, 승리하는 부송 — 부송 배드민턴 클럽';
   ctx.textBaseline='middle';
   lsText(slogan,W/2-lsWidth(slogan,0.9)/2,cy+SLOG_H/2,0.9);
